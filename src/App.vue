@@ -1,9 +1,11 @@
 <script setup>
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
 </script>
 
 <template>
-  <div>Hello world!</div>
+  <div>{{ t('helloWorld') }}</div>
 </template>
 
-<style scoped>
-</style>
+<style scoped></style>
