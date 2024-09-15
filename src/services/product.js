@@ -1,4 +1,4 @@
-import instance from './instance'
+import instance from './api'
 
 export const getLimitProducts = async (limit) => {
   return instance.get(`/products?limit=${limit}`)

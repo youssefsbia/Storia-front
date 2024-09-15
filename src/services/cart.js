@@ -1,4 +1,4 @@
-import instance from './instance'
+import instance from './api'
 
 export const getCart = async (cartId) => {
   return instance.get(`/cart/${cartId}`)

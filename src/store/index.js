@@ -14,10 +14,22 @@ database.register(Cart)
 database.register(CartItem)
 
 const store = createStore({
-  state: {},
-  getters: {},
-  mutations: {},
-  actions: {},
+  state: {
+    darkMode: false
+  },
+  getters: {
+    getDarkMode: (state) => state.darkMode
+  },
+  mutations: {
+    TOGGLE_DARK_MODE(state) {
+      state.darkMode = !state.darkMode
+    }
+  },
+  actions: {
+    toggleDarkMode({ commit }) {
+      commit('TOGGLE_DARK_MODE')
+    }
+  },
   modules: { product, cart },
   plugins: [VuexORM.install(database), vuexPersistedstate()]
 })
