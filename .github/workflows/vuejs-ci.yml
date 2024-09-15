@@ -1,0 +1,57 @@
+name: CI for Vue.js Application
+
+# When to trigger the action (push or pull request to main branch)
+on:
+  push:
+    branches:
+      - master
+      - staging
+      - development
+  pull_request:
+    branches:
+      - master
+      - staging
+      - development
+
+jobs:
+  build:
+    # The environment to run the job (Ubuntu in this case)
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checkout the code from the repository
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      # Step 2: Set up Node.js version
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20.x'
+
+      # Step 3: Install dependencies
+      - name: Install dependencies
+        run: npm install
+
+      # Step 4: Build the Vue.js app
+      - name: Build Vue.js application
+        run: npm run build
+
+      # Step 5: Run tests with Vitest
+      - name: Run Vitest tests
+        run: npm run test
+
+      # Step 6: Cache npm modules to speed up future runs
+      - name: Cache node modules
+        uses: actions/cache@v3
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node-modules-${{ hashFiles('package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-modules
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist
