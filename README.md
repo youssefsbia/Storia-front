@@ -1,6 +1,6 @@
 # Storia
 
-This template should help get you started developing with Vue 3 in Vite.
+his project is a simple e-commerce product gallery built with Vue 3, Vuex, VuexORM, Vuetify, and Tailwind CSS. It features a responsive design, and internationalization support.
 
 ## Recommended IDE Setup
 
@@ -12,30 +12,31 @@ See [Vite Configuration Reference](https://vitejs.dev/config/).
 
 ## Project Setup
 
-```sh
+```bash
+# Clone the repository
+git clone https://github.com/ysbia/Storia-front.git
+cd Storia-front
+
+# Install dependencies
 npm install
-```
 
-### Compile and Hot-Reload for Development
-
-```sh
+# Serve with hot reload at localhost:8080
 npm run dev
-```
 
-### Compile and Minify for Production
-
-```sh
+# Build for production
 npm run build
 ```
 
-### Run Unit Tests with [Vitest](https://vitest.dev/)
+## Docker
 
-```sh
-npm run test:unit
+To build and run the project using Docker:
+
+```bash
+# Build the Docker image
+docker build -t storia .
+
+# Run the container
+docker run -it -p 8080:80 --rm --name storia-container storia
 ```
 
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-npm run lint
-```
+The application will be available at `http://localhost:8080`.
