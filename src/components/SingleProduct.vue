@@ -1,6 +1,7 @@
 <template>
   <div
-    class="w-72 bg-white dark:bg-gray-600 shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl pt-2"
+    class="w-72 bg-white dark:bg-gray-600 shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl pt-2 cursor-pointer"
+    @click="goToProductPage"
   >
     <img :src="product.image" :alt="product.title" class="w-full h-48 object-contain mb-4" />
 
@@ -11,7 +12,12 @@
           ${{ product.price.toFixed(2) }}
         </p>
         <div class="ml-auto cursor-pointer">
-          <img src="@/assets/img/svg/bugPlus.svg" alt="heart" class="w-6 h-6" @click="addToCart" />
+          <img
+            src="@/assets/img/svg/bugPlus.svg"
+            alt="heart"
+            class="w-6 h-6"
+            @click.stop="addToCart"
+          />
         </div>
       </div>
     </div>
@@ -30,7 +36,7 @@ const { product } = defineProps({
   }
 })
 
-const emit = defineEmits('add-to-cart')
+const emit = defineEmits(['add-to-cart', 'go-to-product-page'])
 
 const addToCart = () => {
   const isProductInCart = CartItem.query().where('productId', product.id).exists()
@@ -41,5 +47,9 @@ const addToCart = () => {
     data: { productId: product.id }
   })
   emit('add-to-cart', product)
+}
+
+const goToProductPage = () => {
+  emit('go-to-product-page', product.id)
 }
 </script>

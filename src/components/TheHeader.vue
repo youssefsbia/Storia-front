@@ -7,7 +7,12 @@
         @click="toggleDarkMode"
       >
       </v-btn>
-      <v-btn-toggle :model-value="locale" mandatory @update:modelValue="toggleLanguage">
+      <v-btn-toggle
+        density="compact"
+        :model-value="locale"
+        mandatory
+        @update:modelValue="toggleLanguage"
+      >
         <v-btn value="en">
           <img src="@/assets/img/svg/usa.svg" class="mr-1" />
           EN

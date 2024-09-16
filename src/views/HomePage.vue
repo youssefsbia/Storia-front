@@ -34,7 +34,8 @@
             v-for="product in products"
             :key="product.id"
             :product="product"
-            @addToCart="addToCart"
+            @add-to-cart="addToCart"
+            @go-to-product-page="goToProductPage"
           />
         </div>
       </template>
@@ -48,6 +49,7 @@ import { useStore } from 'vuex'
 import { onMounted, ref, watch } from 'vue'
 import Product from '@/store/models/Product'
 import debounce from 'lodash/debounce'
+import router from '@/router'
 
 const { t } = useI18n()
 const store = useStore()
@@ -63,6 +65,10 @@ const addToCart = () => {
   store.dispatch('makeSnackbarActive', true)
   store.dispatch('cart/manipulateCart')
   store.dispatch('setSnackbarText', t('addToCartOperationSuccess'))
+}
+
+const goToProductPage = (id) => {
+  router.push({ name: 'Product', params: { slug: id } })
 }
 
 const debounceSearch = debounce((val) => {
