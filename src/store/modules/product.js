@@ -9,6 +9,7 @@ export default {
     async fetchProducts(_, limit) {
       const response = await getLimitProducts(limit)
       Product.create({ data: response.data })
+      return response.data
     },
     async getProduct(_, id) {
       const response = await getProduct(id)

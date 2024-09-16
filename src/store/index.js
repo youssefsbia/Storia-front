@@ -15,19 +15,35 @@ database.register(CartItem)
 
 const store = createStore({
   state: {
-    darkMode: false
+    darkMode: false,
+    isSnackbarActive: false,
+    snackbarText: ''
   },
   getters: {
-    getDarkMode: (state) => state.darkMode
+    getDarkMode: (state) => state.darkMode,
+    getIsSnackbarActive: (state) => state.isSnackbarActive,
+    getSnackbarText: (state) => state.snackbarText
   },
   mutations: {
     TOGGLE_DARK_MODE(state) {
       state.darkMode = !state.darkMode
+    },
+    SET_SNACKBAR_ACTIVE(state, payload) {
+      state.isSnackbarActive = payload
+    },
+    SET_SNACKBAR_TEXT(state, payload) {
+      state.snackbarText = payload
     }
   },
   actions: {
     toggleDarkMode({ commit }) {
       commit('TOGGLE_DARK_MODE')
+    },
+    makeSnackbarActive({ commit }, payload) {
+      commit('SET_SNACKBAR_ACTIVE', payload)
+    },
+    setSnackbarText({ commit }, payload) {
+      commit('SET_SNACKBAR_TEXT', payload)
     }
   },
   modules: { product, cart },

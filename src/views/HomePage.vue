@@ -1,5 +1,5 @@
 <template>
-  <h1 class="text-3xl font-bold mb-4 text-gray-800 dark:text-white">
+  <h1 class="text-3xl font-bold mb-4 text--primary">
     {{ t('bestSellers') }}
   </h1>
   <div class="mx-auto">
@@ -9,19 +9,36 @@
       :placeholder="t('search')"
       variant="outlined"
       dense
-      class="mb-4"
-    ></v-text-field>
-    <div
-      class="w-fit mx-auto grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 justify-items-center justify-center gap-y-20 gap-x-14 mt-10 mb-5"
-    >
-      <single-product v-for="product in products" :key="product.id" :product="product">
-        <template #action>
-          <div class="d-flex justify-center align-end">
-            <v-btn color="primary" @click="addToCart(product)">{{ t('addToCart') }}</v-btn>
-          </div>
-        </template>
-      </single-product>
-    </div>
+      class="wmb-4"
+    />
+
+    <Suspense>
+      <template #fallback>
+        <div
+          class="w-fit mx-auto grid grid-cols-1 xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 justify-items-center justify-center gap-y-20 gap-x-14 mt-10 mb-5"
+        >
+          <v-skeleton-loader
+            v-for="i in 8"
+            :key="`skeleton-${i}`"
+            class="w-72"
+            :elevation="1"
+            type="card"
+          ></v-skeleton-loader>
+        </div>
+      </template>
+      <template #default>
+        <div
+          class="w-fit mx-auto grid grid-cols-1 xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 justify-items-center justify-center gap-y-20 gap-x-14 mt-10 mb-5"
+        >
+          <single-product
+            v-for="product in products"
+            :key="product.id"
+            :product="product"
+            @addToCart="addToCart"
+          />
+        </div>
+      </template>
+    </Suspense>
   </div>
 </template>
 <script setup>
@@ -36,14 +53,16 @@ const { t } = useI18n()
 const store = useStore()
 
 const searchProduct = ref('')
-let products = ref([])
+const products = ref([])
 
-const fetchProducts = () => {
-  store.dispatch('product/fetchProducts', 10)
+const fetchProducts = async () => {
+  products.value = await store.dispatch('product/fetchProducts', 10)
 }
 
 const addToCart = () => {
-  store.dispatch('cart/addToCart', {})
+  store.dispatch('makeSnackbarActive', true)
+  store.dispatch('cart/manipulateCart')
+  store.dispatch('setSnackbarText', t('addToCartOperationSuccess'))
 }
 
 const debounceSearch = debounce((val) => {
@@ -60,18 +79,23 @@ watch(searchProduct, (val) => {
   debounceSearch(val)
 })
 
-onMounted(async () => {
-  await fetchProducts()
-  products.value = Product.all()
+onMounted(() => {
+  fetchProducts()
 })
 </script>
 <i18n>
 {
   "en": {
-    "bestSellers": "Best Sellers"
+    "bestSellers": "Best Sellers",
+    "search": "Search",
+    "addToCart": "Add to Cart",
+    "addToCartOperationSuccess": "Add to cart success"
   },
   "fr": {
-    "bestSellers": "Meilleures ventes"
+    "bestSellers": "Meilleures ventes",
+    "search": "Rechercher",
+    "addToCart": "Ajouter au panier",
+    "addToCartOperationSuccess": "Ajouter au panier réussie"
   }
 }
 </i18n>
