@@ -67,6 +67,7 @@ const store = useStore()
 
 const product = computed(() => Product.query().find(route.params.slug))
 
+// add to cart and notify user of success
 const addToCart = () => {
   const isProductInCart = CartItem.query().where('productId', product.value.id).exists()
   if (isProductInCart) {
