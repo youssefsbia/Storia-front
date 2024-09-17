@@ -1,4 +1,6 @@
 import { Model } from '@vuex-orm/core'
+import Cart from './Cart'
+import CartItem from './CartItem'
 
 export default class Product extends Model {
   static entity = 'products'
@@ -10,7 +12,8 @@ export default class Product extends Model {
       price: this.number(0),
       description: this.string(''),
       category: this.string(''),
-      image: this.string('')
+      image: this.string(''),
+      carts: this.belongsToMany(Cart, CartItem, 'productId', 'cartId')
     }
   }
 }
