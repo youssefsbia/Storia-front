@@ -14,7 +14,6 @@ export default {
     async manipulateCart() {
       const playload = CartItem.all()
       const currentCart = Cart.query().first()
-      console.log('🚀 ~ manipulateCart ~ currentCart:', currentCart)
       let response = null
       if (!currentCart) {
         response = await addToCart(playload)

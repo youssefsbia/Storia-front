@@ -57,10 +57,12 @@ const store = useStore()
 const searchProduct = ref('')
 const products = ref([])
 
+// fetch products from the store and set the products ref to the fetched products array of objects with a limit of 10
 const fetchProducts = async () => {
   products.value = await store.dispatch('product/fetchProducts', 10)
 }
 
+// add to cart and notify user that operation success
 const addToCart = () => {
   store.dispatch('makeSnackbarActive', true)
   store.dispatch('cart/manipulateCart')
@@ -71,6 +73,7 @@ const goToProductPage = (id) => {
   router.push({ name: 'Product', params: { slug: id } })
 }
 
+// search products by title and debounce the search
 const debounceSearch = debounce((val) => {
   products.value = Product.query()
     .where('title', (title) => title.includes(val))

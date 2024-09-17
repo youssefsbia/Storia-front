@@ -1,6 +1,6 @@
 # Storia
 
-his project is a simple e-commerce product gallery built with Vue 3, Vuex, VuexORM, Vuetify, and Tailwind CSS. It features a responsive design, and internationalization support.
+This project is a simple e-commerce product gallery built for test purpose with Vue 3, Vuex, VuexORM, Vuetify, and Tailwind CSS. It features a responsive design, and internationalization support.
 
 ## Recommended IDE Setup
 
