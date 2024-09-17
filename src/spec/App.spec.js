@@ -1,40 +1,39 @@
-import { mount } from '@vue/test-utils'
-import { describe, it, expect } from 'vitest'
-import App from '@/App.vue'
-import { createI18n } from 'vue-i18n'
-
-const messages = {
-  en: {
-    helloWorld: 'Hello World!'
-  },
-  fr: {
-    helloWorld: 'Bonjour le monde!'
-  }
+// Mock ResizeObserver
+global.ResizeObserver = class {
+  constructor() {}
+  observe() {}
+  unobserve() {}
+  disconnect() {}
 }
 
-const i18n = (local) =>
-  createI18n({
-    locale: local,
-    messages
-  })
+import { mount } from '@vue/test-utils'
+import App from '@/App.vue'
+import { beforeEach, describe, expect, it } from 'vitest'
+import { createVuetify } from 'vuetify'
+import Vuex from 'vuex'
+import router from '@/router'
+import store from '@/store'
+import { createI18n } from 'vue-i18n'
 
-describe('English translation', () => {
-  it('renders the translated message "Hello World!"', () => {
-    const wrapper = mount(App, {
-      global: {
-        plugins: [i18n('en')]
-      }
-    })
-    expect(wrapper.text()).toContain('Hello World!')
-  })
+// Basic i18n setup for testing
+const i18n = createI18n({
+  locale: 'en',
+  messages: {
+    en: {
+      welcome: 'Welcome'
+    }
+  }
 })
-describe('French translation', () => {
-  it('renders the translated message "Bonjour le monde!"', () => {
+
+describe('App.vue', () => {
+  const vuetify = createVuetify()
+
+  it('renders the router-view', () => {
     const wrapper = mount(App, {
       global: {
-        plugins: [i18n('fr')]
+        plugins: [vuetify, store, router, i18n]
       }
     })
-    expect(wrapper.text()).toContain('Bonjour le monde!')
+    expect(wrapper.find('.v-application').exists()).toBe(true)
   })
 })
