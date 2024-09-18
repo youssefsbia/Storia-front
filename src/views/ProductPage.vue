@@ -4,7 +4,7 @@
       <div class="flex flex-col md:flex-row -mx-4">
         <div class="md:flex-1 px-4">
           <div class="h-[460px] rounded-lg bg-gray-300 dark:bg-gray-700 mb-4">
-            <img class="w-full h-full" :src="product.image" :alt="product.title" />
+            <img class="w-full h-full rounded-md" :src="product.image" :alt="product.title" />
           </div>
           <div class="flex mx-2 mb-4 flex-col gap-2 md:flex-row">
             <div class="w-full md:w-1/2 px-2">

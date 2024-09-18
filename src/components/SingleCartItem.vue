@@ -2,7 +2,7 @@
   <div class="mt-8">
     <div class="relative flex flex-col md:flex-row border-b border-gray-400 py-4">
       <div class="flex-shrink-0">
-        <img :src="item.product.image" alt="Product image" class="w-32 h-32 object-cover" />
+        <img :src="item.product.image" :alt="item.product.title" class="w-32 h-32 object-cover rounded-md" />
       </div>
       <v-btn
         class="!absolute !top-2 !right-0"
