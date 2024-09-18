@@ -5,7 +5,6 @@
   <div class="mx-auto">
     <v-text-field
       v-model="searchProduct"
-      label="Search"
       :placeholder="t('search')"
       variant="outlined"
       dense

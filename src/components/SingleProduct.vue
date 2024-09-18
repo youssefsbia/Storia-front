@@ -3,7 +3,7 @@
     class="w-72 bg-white dark:bg-gray-600 shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl pt-2 cursor-pointer"
     @click="goToProductPage"
   >
-    <img :src="product.image" :alt="product.title" class="w-full h-48 object-contain mb-4" />
+    <img :src="product.image" :alt="product.title" class="w-full h-48 object-contain mb-4 rounded-md" />
 
     <div class="px-4 py-3 w-72">
       <p class="text-lg font-bold text-black truncate block capitalize">{{ product.title }}</p>

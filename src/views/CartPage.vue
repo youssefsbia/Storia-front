@@ -23,12 +23,11 @@
       <span class="text-gray-600 mr-4">{{ t('total') }}:</span>
       <span class="text-xl font-bold cart-total">${{ total?.toFixed(2) }}</span>
     </div>
-    <div class="flex flex-column justify-end items-center md:items-end mt-8">
+    <div v-if="cartItems.length" class="flex flex-column justify-end items-center md:items-end mt-8">
       <p v-if="minToBuy" class="text-center mb-2 text-gray-500 font-light text-sm">
         {{ t('conditionToBuy', { minToBuy }) }}
       </p>
       <v-btn
-        v-if="cartItems.length"
         class="block checkout"
         :disabled="minToBuy > total"
         color="primary"
