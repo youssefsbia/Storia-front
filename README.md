@@ -17,8 +17,7 @@ See [Vite Configuration Reference](https://vitejs.dev/config/).
 git clone https://github.com/ysbia/Storia-front.git
 cd Storia-front
 
-#Environment Configuration
-cp .env.example .env
+p .env.example .env
 
 # Install dependencies
 npm install
@@ -43,3 +42,48 @@ docker run -it -p 8080:80 --rm --name storia-container storia
 ```
 
 The application will be available at `http://localhost:8080`.
+
+## Feature
+
+-Fetch products
+-Add product to cart
+-Delete Product from cart
+-Update product quantity in cart
+-Show single product
+-Dark mode
+-Internationalization
+
+## architectural overview
+
+Try to make project clean by using SFC
+
+### Service
+- api calls files
+
+### Lang
+- translation files
+
+### Setup
+- plugins config
+
+### Store
+- vuexOrm models
+- vuex modules
+
+### Views
+- pages
+
+### Router
+- routes
+
+### Spec
+- test files
+
+### Components
+- components
+
+### assets
+- images and styles
+
+## User Story 2 choosen
+- Minimum Order Cart

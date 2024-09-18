@@ -28,7 +28,7 @@
 
 <script setup>
 import { useStore } from 'vuex'
-import { computed, onBeforeUnmount, onMounted, ref } from 'vue'
+import { computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 import TheHeader from '@/components/TheHeader.vue'
 import CartItem from './store/models/CartItem'
@@ -38,7 +38,6 @@ const { locale } = useI18n()
 const store = useStore()
 const router = useRouter()
 
-const timer = ref(null)
 const appName = computed(() => import.meta.env.VITE_APP_APP_NAME)
 const darkMode = computed(() => store.getters['getDarkMode'])
 
@@ -61,21 +60,4 @@ const goToCart = () => {
 const goToHome = () => {
   router.push({ name: 'Home' })
 }
-
-const clearCart = () => {
-  CartItem.deleteAll()
-}
-
-// Clear cart every 15 minutes
-onMounted(() => {
-  timer.value = setInterval(
-    () => {
-      clearCart()
-    },
-    15 * 60 * 1000
-  )
-})
-onBeforeUnmount(() => {
-  clearInterval(timer.value)
-})
 </script>
