@@ -17,6 +17,9 @@ See [Vite Configuration Reference](https://vitejs.dev/config/).
 git clone https://github.com/ysbia/Storia-front.git
 cd Storia-front
 
+#Environment Configuration
+cp .env.example .env
+
 # Install dependencies
 npm install
 
