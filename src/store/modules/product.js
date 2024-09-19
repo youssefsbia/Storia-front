@@ -7,13 +7,21 @@ export default {
   mutations: {},
   actions: {
     async fetchProducts(_, limit) {
-      const response = await getLimitProducts(limit)
-      Product.create({ data: response.data })
-      return response.data
+      try {
+        const response = await getLimitProducts(limit)
+        Product.create({ data: response.data })
+        return response.data
+      } catch (e) {
+        console.log(e)
+      }
     },
     async getProduct(_, id) {
-      const response = await getProduct(id)
-      Product.insert({ data: response.data })
+      try {
+        const response = await getProduct(id)
+        Product.insert({ data: response.data })
+      } catch (e) {
+        console.log(e)
+      }
     }
   },
   getters: {}

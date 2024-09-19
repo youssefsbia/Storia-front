@@ -16,11 +16,19 @@ export default {
       const currentCart = Cart.query().first()
       let response = null
       if (!currentCart) {
-        response = await addToCart(playload)
-        Cart.create({ data: response.data })
+        try {
+          response = await addToCart(playload)
+          Cart.create({ data: response.data })
+        } catch (e) {
+          console.log(e)
+        }
       } else {
-        response = await updateCart(currentCart.id, playload)
-        Cart.insert({ data: response.data })
+        try {
+          response = await updateCart(currentCart.id, playload)
+          Cart.insert({ data: response.data })
+        } catch (e) {
+          console.log(e)
+        }
       }
     }
   },
